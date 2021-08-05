@@ -1,25 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Addresses from '../views/Addresses.vue'
-import AddressForm from '../views/AddressForm.vue'
+// import todoAdd from '../views/todoAdd.vue'
+import todoViews from '../views/todoViews.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },{
-    path:"/addresses",
-    name:"Addresses",
-    component: Addresses
-  },{
-    path:"/addresses/:address_id?/edit",
-    name:"Address_Edit",
-    component: AddressForm
-  }
+    path:"/todoviews",
+    name:"todoViews",
+    component: todoViews
+  },
+    // {path:"/todoadd",
+    // name:"todoAdd",
+    // component: todoAdd},
+  
 ]
 
 const router = new VueRouter({

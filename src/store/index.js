@@ -13,24 +13,14 @@ const initialState = {
 export default new Vuex.Store({
   state: initialState,
   mutations: {    
-    addAddress(state, address){           
-      state.addresses.push(address);
-    },
-    deleteAddress(state){     
-      state.addresses =[]      
-    },
-    addMyAddress(state, address){   
-      state.userExist = true;        
-      state.myaddresses = address;
-    },
-    updateMyAddress(state, address){
-      state.myaddresses = address ;
-    },
     setLoginUser(state, user){
       state.login_user = user //ログインユーザー情報をstateのlogin_userにセット
     },
     deleteLoginUser(state){
       state.login_user = null //ログインユーザー情報(stateのlogin_user)を空にする
+    },    
+    setTodo( state, todos ){      
+      state.todos = todos      
     },
   },
   actions: {
@@ -52,21 +42,48 @@ export default new Vuex.Store({
     deleteLoginUser({ commit }){
       commit('deleteLoginUser') //mutationのログイン情報削除の呼び出し
     },
-    fetchAddresses({ commit, getters }){
-      commit('deleteAddress')
+    fetchTodos({ commit, getters }){      
       firebase.firestore().collection(`users`).get().then( querySnapshot => {                
         querySnapshot.forEach( doc => {
-          if( doc.id == getters.uid ){ commit('addMyAddress', doc.data() ); }
-          else{ commit('fetchAddress', doc.data() ) }
+          if( doc.id == getters.uid ){ commit('setTodo', doc.data() ); }          
         })        
       })
+    },
+    addTodo({ commit, getters }, todo){
+      let todos = getters.getTodos
+      todos.push[todo]
+
+      if(getters.uid){
+        firebase
+          .firestore()
+          .collection(`users`) 
+          .doc(getters.uid)
+          .set({ todos })
+          .then( () => {
+            commit("setTodo", todos );
+          });
+      }
+    },
+    deleteTodo({ commit, getters }, todo){
+      let todos = getters.getTodos.filter( t => !(t === todo) )        
+      console.log(todos);
+
+      if(getters.uid){
+        firebase
+          .firestore()
+          .collection(`users`) 
+          .doc(getters.uid)
+          .set({ todos })
+          .then( () => {
+            commit("setTodo", todos );
+          });
+      }
     },
   },
   getters:{
     userName: state => state.login_user ? state.login_user.displayName : '',
     photoURL: state => state.login_user ? state.login_user.photoURL : '',    
-    uid: state => state.login_user ? state.login_user.uid : null,    
-    getAddress: state => state.login_user ? state.addresses : {},
-    getMyAddress: state => state.login_user ? state.myaddresses : {},        
+    uid: state => state.login_user ? state.login_user.uid : null,  
+    getTodos: state => state.login_user ? state.todos : []              
   },
 })
