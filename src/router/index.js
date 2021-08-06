@@ -5,6 +5,7 @@ import todoAdd from '../views/todoAdd.vue'
 import todoViews from '../views/todoViews.vue'
 import Board from '../views/Board.vue'
 import todoEdit from '../views/todoEdit.vue'
+import memo from '../vies/memo.vue'
 
 Vue.use(VueRouter)
 
@@ -25,13 +26,19 @@ const routes = [
     path:"/board",
     name:"Board",
     component: Board
-  },{
-    path:'/todoEdit',
-    name:"todoEdit",
-    component:todoEdit
-  }
+  },
+    {
+      path:'/todoEdit',
+      name:"todoEdit",
+      component:todoEdit
+    },
+    {
+      path:'/memo',
+      name:'memo',
+      component:memo
+    }
   
-]
+  ]
 
 const router = new VueRouter({
   mode: 'history',
