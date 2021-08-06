@@ -24,6 +24,11 @@ export default new Vuex.Store({
       todo.id = id;
       state.todos.push(todo);
     },
+    fetchTd(state, { id, todo }) {
+      state.todos = []
+      todo.id = id;
+      state.todos.push(todo);
+    },
     updateTd(state, { id, todo }) {
       const index = state.todos.findIndex(td => td.id === id);
       state.todos[index] = todo;
@@ -101,7 +106,7 @@ export default new Vuex.Store({
     fetchTd({ getters, commit }) {      
       firebase.firestore().collection(`users/${getters.uid}/todos`).get().then(snapshot => {        
         snapshot.forEach(doc => {
-          commit('addTd', { id: doc.id, todo: doc.data() })          
+          commit('fetchTd', { id: doc.id, todo: doc.data() })          
         })
       })
     },  

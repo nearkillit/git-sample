@@ -26,17 +26,11 @@ const routes = [
     name:"Board",
     component: Board
   },
-<<<<<<< HEAD
-    // {path:"/todoadd",
-    // name:"todoAdd",
-    // component: todoAdd},
-=======
     {
       path:'/todoEdit',
       name:"todoEdit",
       component:todoEdit
     }
->>>>>>> 583007018fb00071a5ffe027e40f046c4ff17ead
   
   ]
 

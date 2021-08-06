@@ -38,8 +38,7 @@ export default {
     firebase.auth().onAuthStateChanged( user => {
         if(user){                  
           this.setLoginUser(user);
-          this.fetchTd();
-          console.log(this.getTodos);                       
+          this.fetchTd();                              
         }else{
           this.deleteLoginUser();
           this.$router.push({ name:"Home" }, () => {});
