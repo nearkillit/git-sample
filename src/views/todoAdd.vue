@@ -75,8 +75,7 @@ import { mapActions } from 'vuex'
                     alert(check + ' が入力されていません。');
                                 
                 }else{                                  
-                    this.addTd(this.todo)               
-                    console.log(this.todo);
+                    this.addTd(this.todo);                                  
                     this.gotoLink('todoViews')
                 }                
             },
