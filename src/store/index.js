@@ -22,6 +22,11 @@ export default new Vuex.Store({
     setTodo( state, todos ){      
       state.todos = todos      
     },
+    // // todoEdit(state,{id,address}){
+    // //   const index=state.address.findIndex((address)=>
+    // //   address.id===id);
+    // //   state.address[index]=address
+    // }
   },
   actions: {
     toggleSideMenu({ commit }){
@@ -48,6 +53,17 @@ export default new Vuex.Store({
           if( doc.id == getters.uid ){ commit('setTodo', doc.data() ); }          
         })        
       })
+      // // todoEdit({getters,commit},{id,address}){
+      // //   if(getters.uid){
+      // //     firebase.firestore()
+      // //     .collection(`users/${getters.uid}/address`)
+      // //     .doc(id)
+      // //     .updata(address)
+      // //     .then(()=>{
+      // //       commit("todoEdit,{id,address")
+      //     })
+      //   }
+      // }
     },
     addTodo({ commit, getters }, todo){
       let todos = getters.getTodos

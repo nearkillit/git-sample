@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 // import todoAdd from '../views/todoAdd.vue'
 import todoViews from '../views/todoViews.vue'
+import todoEdit from '../views/todoEdit'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,11 @@ const routes = [
     // {path:"/todoadd",
     // name:"todoAdd",
     // component: todoAdd},
+    {
+      path:'/todoEdit',
+      name:"todoEdit",
+      component:todoEdit
+    }
   
 ]
 

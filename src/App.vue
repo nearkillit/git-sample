@@ -2,6 +2,7 @@
   <div id="app">
     <h1>Todoリスト</h1>
     <router-view></router-view>
+    <router-link to="/todoEdit">追加</router-link>
   </div>
 </template>
 

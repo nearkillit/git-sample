@@ -19,7 +19,7 @@
             <td>{{todo.memo}}</td>
             <td>
                 <button @click="dltTodo(todo)">削除</button>
-                <button>編集</button>
+                <button @click="todoEdit(todo)">編集</button>
             </td>
         </tr>
     </table>
