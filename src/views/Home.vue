@@ -10,6 +10,9 @@
     <div>
       <button @click="gotoLink('todoAdd')">Todo追加</button>
     </div>    
+    <div>
+      <button @click="gotoLink('Board')">掲示板</button>
+    </div> 
   </div>
 </template>
 
@@ -39,7 +42,7 @@ export default {
           this.fetchTodos();                    
         }else{
           this.deleteLoginUser();
-          this.$router.push({ name:"home" }, () => {});
+          this.$router.push({ name:"Home" }, () => {});
         }
         this.loading = false      
     })       
