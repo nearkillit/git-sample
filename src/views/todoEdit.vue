@@ -48,20 +48,20 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
   data(){
     return {
-      todos:[
+      todo:[
           {
-              date:new Date(),
-              title:"test",
-              content:"この内容はテストです",
-              deadline:new Date(),
-              progress:80,
-              memo:"消すのを忘れないように"
+              // date:new Date(),
+              // title:"test",
+              // content:"この内容はテストです",
+              // deadline:new Date(),
+              // progress:80,
+              // memo:"消すのを忘れないように"
           }
       ]
     }
@@ -70,19 +70,32 @@ export default {
      ...mapActions(["todoEdit"]),
 
     todoEdit(){
-      if(this.$route.params.address_id){
-      this.todoEdit({
-        id:this.$route.params.address_id,
-        address:this.address
-      })}
-      else{
-        this.todoEdit(this.address)
-      }
-      this.$router.push({name:"addresses"})
-      this.address={}
+      // if(this.$route.params.address_id){
+      // this.todo=
+      // })}
+      // else{
+      //   this.todoEdit(this.address)
+      // }
+      // this.$router.push({name:"addresses"})
+      // this.address={}
       
     }
 
+  },
+  created(){
+    if(this.$route.params.id){
+      this.todo=this.getTodo($router.params.id)
+    }
+      else{
+      updateTd(){
+        this.$router.push('/Home')
+      }
+      }
+    
+      
+  },
+  computed:{
+    ...mapGetters(["getTodo"])
   }
 }
 
