@@ -4,16 +4,13 @@
     <h1>Todo編集画面</h1>
         <p>
             <label>タイトル</label>
-            <input type="text" v-model="todo.title">
+            {{todo.title}}
         </p>
         <p>
             <label>内容</label>
             <textarea name="todo" id="" cols="30" rows="10" v-model="todo.content"></textarea>
         </p>
-        <p>
-            <label for="">開始日</label>
-            <input size="10" value="2021-08-06" type="date" v-model="todo.date">
-        </p>
+        
         <p>
             <label>期日</label>
             <input size='10' type="date" v-model="todo.deadline">
@@ -37,7 +34,7 @@
             <label>メモ</label>
             <input  type="text" v-model="todo.memo" >
         </p>
-        <input type="submit" name='submit' value="追加" @click="submit">
+        <input type="submit" name='submit' value="変更" @click="submit">
         <div>
             <button @click="gotoLink('todoViews')">Todo一覧</button>
         </div>
@@ -61,7 +58,14 @@ export default {
     ...mapGetters(['getTodo'])
   },
   methods:{
-    ...mapActions(['updateTd'])
+    ...mapActions(['updateTd']),
+    submit(){
+   this.updateTd({id:this.todo.id,todo:this.todo})
+   this.$router.push({name:"todoViews"})
+    },
+    gotoLink(name){
+                this.$router.push({name},()=>{});
+            }
   },
   created(){
     if(this.$route.params.id){

@@ -37,7 +37,7 @@ export default new Vuex.Store({
     deleteTd(state, { id }) {
       const index = state.todos.findIndex(td => td.id === id)
       state.todos.splice(index, 1);
-    } 
+    } ,
   },
   actions: {
     toggleSideMenu({ commit }){
