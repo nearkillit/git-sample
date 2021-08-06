@@ -54,66 +54,21 @@ export default {
   name: 'App',
   data(){
     return {
-<<<<<<< HEAD
-      todo:[
-          {
-              // date:new Date(),
-              // title:"test",
-              // content:"この内容はテストです",
-              // deadline:new Date(),
-              // progress:80,
-              // memo:"消すのを忘れないように"
-          }
-      ]
-=======
       todo:{}
->>>>>>> 2906ca38ff725fa07d299bd86f9faffa8d2a5de8
     }
   },
   computed:{
     ...mapGetters(['getTodo'])
   },
   methods:{
-<<<<<<< HEAD
-     ...mapActions(["todoEdit"]),
-
-    todoEdit(){
-      // if(this.$route.params.address_id){
-      // this.todo=
-      // })}
-      // else{
-      //   this.todoEdit(this.address)
-      // }
-      // this.$router.push({name:"addresses"})
-      // this.address={}
-      
-    }
-
-  },
-  created(){
-    if(this.$route.params.id){
-      this.todo=this.getTodo($router.params.id)
-    }
-      else{
-      updateTd(){
-        this.$router.push('/Home')
-      }
-      }
-    
-      
-  },
-  computed:{
-    ...mapGetters(["getTodo"])
-=======
     ...mapActions(['updateTd'])
   },
   created(){
     if(this.$route.params.id){
       this.todo = this.getTodo(this.$route.params.id)
     }else{
-      this.$router.push({name:"addresses"})
+      this.$router.push({name:"Home"})
       }                 
->>>>>>> 2906ca38ff725fa07d299bd86f9faffa8d2a5de8
   }
 }
 
