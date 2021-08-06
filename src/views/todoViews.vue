@@ -21,7 +21,7 @@
             <td>{{todo.id}}</td>
             <td>
                 <button @click="dltTodo(todo)">削除</button>
-                <button @click="editTodo(todo)">編集</button>
+                <button @click="edtTodo(todo)">編集</button>
                 <button @click="deleteTd({ id:todo.id })">削除（※テスト）</button>
             </td>
         </tr>
@@ -50,6 +50,9 @@ export default {
             alert("キャンセルしました。");
         }
     },
+    edtTodo(todo){
+        this.$router.push({ name:"todoEdit", params: { id:todo.id} });
+    }
   },  
   computed:{
       ...mapGetters(['getTodos']),
