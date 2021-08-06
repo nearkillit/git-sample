@@ -67,7 +67,7 @@ export default {
     if(this.$route.params.id){
       this.todo = this.getTodo(this.$route.params.id)
     }else{
-      this.$router.push({name:"addresses"})
+      this.$router.push({name:"Home"})
       }                 
   }
 }
