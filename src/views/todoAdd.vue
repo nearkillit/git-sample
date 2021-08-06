@@ -1,8 +1,8 @@
 <template>
-    <!-- <h1>todoリスト追加画面</h1> -->
-    <div> 
+  
+    <div id="moji"> 
         <p>
-            <label>タイトル</label>
+            <label>タイトル★★</label>
             <input type="text" v-model="todo.title">
         </p>
         <p>
@@ -89,3 +89,12 @@ import { mapActions } from 'vuex'
     }
 
 </script>
+<style>
+/* @import "./css/styles.css";
+
+#moji{
+   text-align: justify;
+text-justify: inter-ideograph; 
+} */
+
+</style>

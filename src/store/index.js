@@ -20,10 +20,6 @@ export default new Vuex.Store({
     deleteLoginUser(state){
       state.login_user = null //ログインユーザー情報(stateのlogin_user)を空にする
     },    
-    setTodo( state, todos ){      
-      state.todos = todos      
-    },
-  // ********************* ********************* *********************
     addTd(state, { id, todo }) {
       todo.id = id;
       state.todos.push(todo);
@@ -35,8 +31,7 @@ export default new Vuex.Store({
     deleteTd(state, { id }) {
       const index = state.todos.findIndex(td => td.id === id)
       state.todos.splice(index, 1);
-    }
-  // ********************* ********************* *********************
+    } 
   },
   actions: {
     toggleSideMenu({ commit }){
@@ -57,55 +52,42 @@ export default new Vuex.Store({
     deleteLoginUser({ commit }){
       commit('deleteLoginUser') //mutationのログイン情報削除の呼び出し
     },
-    fetchTodos({ commit, getters }){      
-      firebase.firestore().collection(`users`).get().then( querySnapshot => {                
-        querySnapshot.forEach( doc => {
-          if( doc.id == getters.uid ){ commit('setTodo', doc.data() ); }          
-        })        
-      })
-    },
-    addTodo({ commit, getters }, todo){
-      let todos = getters.getTodos
-      todos.push[todo]
+    // 掲示板の時に使います（※おそらく）
+    // fetchTodos({ commit, getters }){      
+    //   firebase.firestore().collection(`users`).get().then( querySnapshot => {                
+    //     querySnapshot.forEach( doc => {
+    //       if( doc.id == getters.uid ){ commit('setTodo', doc.data() ); }          
+    //     })        
+    //   })
+    // },
+    // addTodo({ commit, getters }, todo){
+    //   let todos = getters.getTodos
+    //   todos.push[todo]
 
-      if(getters.uid){
-        firebase
-          .firestore()
-          .collection(`users`) 
-          .doc(getters.uid)
-          .set({ todos })
-          .then( () => {
-            commit("setTodo", todos );
-          });
-      }
-    },
-    deleteTodo({ commit, getters }, todo){
-      let todos = getters.getTodos.filter( t => !(t === todo) )
-      console.log(todos);
-
-      if(getters.uid){
-        firebase
-          .firestore()
-          .collection(`users`) 
-          .doc(getters.uid)
-          .set({ todos })
-          .then( () => {
-            commit("setTodo", todos );
-          });
-      }
-    },
-  // ********************* ********************* *********************
-    addTd({ getters, commit }, todo) {
+    //   if(getters.uid){
+    //     firebase
+    //       .firestore()
+    //       .collection(`users`) 
+    //       .doc(getters.uid)
+    //       .set({ todos })
+    //       .then( () => {
+    //         commit("setTodo", todos );
+    //       });
+    //   }
+    // },  
+    addTd({ getters, commit }, todo) {      
       if (getters.uid) {
+        console.log('addtd');
         firebase.firestore().collection(`users/${getters.uid}/todos`).add(todo).then((doc) => {
           commit('addTd', { id: doc.id, todo })
         });
       }
     },
     updateTd({ getters, commit }, { id, todo }) {
+      console.log(todo);
       if (getters.uid) {
         firebase.firestore().collection(`users/${getters.uid}/todos`).doc(id).update(todo).then(() => {
-          commit('updateTd', { id, todo })
+          commit('updateTd', { id, todo })          
         });
       }
     },
@@ -115,8 +97,14 @@ export default new Vuex.Store({
           commit('deleteTd', { id })
         })
       }
-    }
-  // ********************* ********************* *********************
+    },
+    fetchTd({ getters, commit }) {      
+      firebase.firestore().collection(`users/${getters.uid}/todos`).get().then(snapshot => {        
+        snapshot.forEach(doc => {
+          commit('addTd', { id: doc.id, todo: doc.data() })          
+        })
+      })
+    },  
   },
   getters:{
     userName: state => state.login_user ? state.login_user.displayName : '',
