@@ -48,41 +48,27 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
   data(){
     return {
-      todos:[
-          {
-              date:new Date(),
-              title:"test",
-              content:"この内容はテストです",
-              deadline:new Date(),
-              progress:80,
-              memo:"消すのを忘れないように"
-          }
-      ]
+      todo:{}
     }
   },
+  computed:{
+    ...mapGetters(['getTodo'])
+  },
   methods:{
-     ...mapActions(["todoEdit"]),
-
-    todoEdit(){
-      if(this.$route.params.address_id){
-      this.todoEdit({
-        id:this.$route.params.address_id,
-        address:this.address
-      })}
-      else{
-        this.todoEdit(this.address)
-      }
+    ...mapActions(['updateTd'])
+  },
+  created(){
+    if(this.$route.params.id){
+      this.todo = this.getTodo(this.$route.params.id)
+    }else{
       this.$router.push({name:"addresses"})
-      this.address={}
-      
-    }
-
+      }                 
   }
 }
 

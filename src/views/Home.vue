@@ -1,16 +1,12 @@
 <template>
-  <div id="app"> 
-    <p v-if="loading">loading...</p>   
+  <div id="app">     
     <div>
       <button @click="login">login</button>
+      <span v-if="loading">loading...</span>   
     </div>
-    <div>
+    <div v-if="!loading">    
       <button @click="gotoLink('todoViews')">Todo一覧</button>
-    </div>
-    <div>
       <button @click="gotoLink('todoAdd')">Todo追加</button>
-    </div>    
-    <div>
       <button @click="gotoLink('Board')">掲示板</button>
     </div> 
   </div>
