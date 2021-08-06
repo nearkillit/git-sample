@@ -10,6 +10,9 @@
     <div>
       <button @click="gotoLink('todoAdd')">Todo追加</button>
     </div>    
+    <div>
+      <button @click="gotoLink('Board')">掲示板</button>
+    </div> 
   </div>
 </template>
 

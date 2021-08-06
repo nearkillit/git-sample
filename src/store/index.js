@@ -8,6 +8,7 @@ const initialState = {
   login_user: null,  
   todos:[],
   userExist:false,  
+  boards:[]
 }
 
 export default new Vuex.Store({
@@ -22,6 +23,20 @@ export default new Vuex.Store({
     setTodo( state, todos ){      
       state.todos = todos      
     },
+  // ********************* ********************* *********************
+    addTd(state, { id, todo }) {
+      todo.id = id;
+      state.todos.push(todo);
+    },
+    updateTd(state, { id, todo }) {
+      const index = state.todos.findIndex(td => td.id === id);
+      state.todos[index] = todo;
+    },
+    deleteTd(state, { id }) {
+      const index = state.todos.findIndex(td => td.id === id)
+      state.todos.splice(index, 1);
+    }
+  // ********************* ********************* *********************
   },
   actions: {
     toggleSideMenu({ commit }){
@@ -65,7 +80,7 @@ export default new Vuex.Store({
       }
     },
     deleteTodo({ commit, getters }, todo){
-      let todos = getters.getTodos.filter( t => !(t === todo) )        
+      let todos = getters.getTodos.filter( t => !(t === todo) )
       console.log(todos);
 
       if(getters.uid){
@@ -79,6 +94,29 @@ export default new Vuex.Store({
           });
       }
     },
+  // ********************* ********************* *********************
+    addTd({ getters, commit }, todo) {
+      if (getters.uid) {
+        firebase.firestore().collection(`users/${getters.uid}/todos`).add(todo).then((doc) => {
+          commit('addTd', { id: doc.id, todo })
+        });
+      }
+    },
+    updateTd({ getters, commit }, { id, todo }) {
+      if (getters.uid) {
+        firebase.firestore().collection(`users/${getters.uid}/todos`).doc(id).update(todo).then(() => {
+          commit('updateTd', { id, todo })
+        });
+      }
+    },
+    deleteTd({ getters, commit }, { id }) {
+      if (getters.uid) {
+        firebase.firestore().collection(`users/${getters.uid}/todos`).doc(id).delete().then(() => {
+          commit('deleteTd', { id })
+        })
+      }
+    }
+  // ********************* ********************* *********************
   },
   getters:{
     userName: state => state.login_user ? state.login_user.displayName : '',

@@ -25,19 +25,22 @@
 </template>
 
 <script lang="ts">
+    
     export default{
         data(){
             return{
-                todos:[    
-                    title:'',
-                    content:'',
-                    date:new Date(),   
+                todos:[  
+                    {  
+                        title:'',
+                        content:'',
+                        date:new Date(),   
+                    }
                 ] 
               }   
         },
         methods:{
             submit(){
-                this.$store.dispatch('addTodo',todos);
+              console.log('submit');            
             },
 
             gotoLink(name){

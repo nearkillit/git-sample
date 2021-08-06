@@ -19,7 +19,8 @@
             <td>{{todo.memo}}</td>
             <td>
                 <button @click="dltTodo(todo)">削除</button>
-                <button>編集</button>
+                <button @click="editTodo(todo)">編集</button>
+                <button @click="addTd(todo)">追加（※テスト）</button>
             </td>
         </tr>
     </table>
@@ -46,7 +47,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['deleteTodo']),
+    ...mapActions(['deleteTodo','addTd']),
     
     dltTodo(todo){
         var res = confirm("削除しても大丈夫ですか？");
