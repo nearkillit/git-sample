@@ -1,8 +1,10 @@
 <template>
   <div id="app">     
     <div>
-      <button @click="login">login</button>
-      <span v-if="loading">loading...</span>   
+      <button v-if="!userName" @click="login">login</button>
+      <button v-else-if="userName" @click="logout">logout</button>
+      <span v-if="loading">loading...</span>  
+      <span v-else-if="userName">ようこそ！ {{userName}} さん</span> 
     </div>
     <div v-if="!loading">    
       <button @click="gotoLink('todoViews')">Todo一覧</button>
@@ -24,7 +26,7 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['getTodos']),
+    ...mapGetters(['getTodos','userName']),
   },
   methods:{
     ...mapActions(["setLoginUser", "logout", "deleteLoginUser","fetchTd","login"]),

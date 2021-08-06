@@ -68,7 +68,7 @@ export default {
       this.todo = this.getTodo(this.$route.params.id)
     }else{
       this.$router.push({name:"Home"})
-      }                 
+    }                 
   }
 }
 

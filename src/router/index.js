@@ -25,14 +25,13 @@ const routes = [
     path:"/board",
     name:"Board",
     component: Board
-  },
-    {
-      path:'/todoEdit',
-      name:"todoEdit",
-      component:todoEdit
-    }
+  },{
+    path:'/todoEdit',
+    name:"todoEdit",
+    component:todoEdit
+  }
   
-  ]
+]
 
 const router = new VueRouter({
   mode: 'history',

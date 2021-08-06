@@ -4,8 +4,7 @@
     <div>      
       <button @click="gotoLink('Home')">Homeへ</button>
     </div> 
-    <router-view></router-view>
-    <router-link to="/todoEdit">追加</router-link>
+    <router-view></router-view>    
   </div>
 </template>
 
