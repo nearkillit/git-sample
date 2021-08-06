@@ -1,16 +1,12 @@
 <template>
-  <div id="app"> 
-    <p v-if="loading">loading...</p>   
+  <div id="app">     
     <div>
       <button @click="login">login</button>
+      <span v-if="loading">loading...</span>   
     </div>
-    <div>
+    <div v-if="!loading">    
       <button @click="gotoLink('todoViews')">Todo一覧</button>
-    </div>
-    <div>
       <button @click="gotoLink('todoAdd')">Todo追加</button>
-    </div>    
-    <div>
       <button @click="gotoLink('Board')">掲示板</button>
     </div> 
   </div>
@@ -18,7 +14,7 @@
 
 <script>
 import firebase from 'firebase'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -27,8 +23,11 @@ export default {
       loading:false
     }
   },
+  computed:{
+    ...mapGetters(['getTodos']),
+  },
   methods:{
-    ...mapActions(["setLoginUser", "logout", "deleteLoginUser","fetchTodos","login"]),
+    ...mapActions(["setLoginUser", "logout", "deleteLoginUser","fetchTd","login"]),
     
     gotoLink(name){      
       this.$router.push({ name }, () => {});
@@ -39,7 +38,8 @@ export default {
     firebase.auth().onAuthStateChanged( user => {
         if(user){                  
           this.setLoginUser(user);
-          this.fetchTodos();                    
+          this.fetchTd();
+          console.log(this.getTodos);                       
         }else{
           this.deleteLoginUser();
           this.$router.push({ name:"Home" }, () => {});
