@@ -25,12 +25,9 @@ const routes = [
     name:"Board",
     component: Board
   },
-<<<<<<< HEAD
-=======
-    {path:"/todoadd",
-    name:"todoAdd",
-    component: todoAdd},
->>>>>>> 6524ee4775f77bf6d7e3affd5d2b0d5cd0ac66b0
+    // {path:"/todoadd",
+    // name:"todoAdd",
+    // component: todoAdd},
   
 ]
 

@@ -42,7 +42,7 @@ export default {
           this.fetchTodos();                    
         }else{
           this.deleteLoginUser();
-          this.$router.push({ name:"home" }, () => {});
+          this.$router.push({ name:"Home" }, () => {});
         }
         this.loading = false      
     })       
