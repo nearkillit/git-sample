@@ -36,7 +36,7 @@
             <label>メモ</label>
             <input  type="text" v-model="todo.memo" >
         </p>
-        <input type="submit" name='submit' value="追加" @click="submit">
+        <input type="submit" name='submit' value="追加" @click="submit('todoViews')">
         <div>
             <button @click="gotoLink('todoViews')">Todo一覧</button>
         </div>
@@ -61,9 +61,24 @@ import { mapActions } from 'vuex'
         methods:{
             ...mapActions(['addTodo']),
             submit(){
+                    if(this.todo.title===''){
+                         alert('タイトルが入力されていません')
+                    }
+                     if(this.todo.content===''){
+                         alert('コンテンツが入力されていません')
+                    }
+                     if(this.todo.data===''){
+                         alert('日付が入力されていません')
+                    }
+                     if(this.todo.deadline===''){
+                         alert('期日が入力されていません')
+                    }
+                     if(this.todo.progress===''){
+                         alert('進捗率が設定されていません')
+                    }
                 this.addTodo(this.todo)
-                console.log(this.todo);
-                
+                console.log(this.todo); 
+                 this.gotoLink('todoViews')
             },
 
             gotoLink(name){
