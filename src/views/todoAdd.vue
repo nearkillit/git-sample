@@ -10,10 +10,6 @@
             <textarea name="todo" id="" cols="30" rows="10" v-model="todo.content"></textarea>
         </p>
         <p>
-            <label for="">開始日</label>
-            <input size="10" value="2021-08-06" type="date" v-model="todo.date">
-        </p>
-        <p>
             <label>期日</label>
             <input size='10' type="date" v-model="todo.deadline">
         </p>
@@ -36,7 +32,7 @@
             <label>メモ</label>
             <input  type="text" v-model="todo.memo" >
         </p>
-        <input type="submit" name='submit' value="追加" @click="submit('todoViews')">
+        <input type="submit" name='submit' value="追加" @click="submit()">
         <div>
             <button @click="gotoLink('todoViews')">Todo一覧</button>
         </div>
@@ -55,30 +51,34 @@ import { mapActions } from 'vuex'
                     deadline:'',
                     memo:'',
                     progress:''
+                 },
+                 todoChange: {
+                     title:'タイトル',
+                     content:'内容',
+                     deadline:'期日',
+                     memo:'メモ',
+                     progress:'進捗率'
                  } 
               }   
         },
         methods:{
-            ...mapActions(['addTodo']),
+            ...mapActions(['addTd']),
             submit(){
-                    if(this.todo.title===''){
-                         alert('タイトルが入力されていません')
+                let check = ''
+                for( const t in this.todo ){
+                    if(this.todo[t] === ''){ 
+                        check += this.todoChange[t] + ', ' 
                     }
-                     if(this.todo.content===''){
-                         alert('コンテンツが入力されていません')
-                    }
-                     if(this.todo.data===''){
-                         alert('日付が入力されていません')
-                    }
-                     if(this.todo.deadline===''){
-                         alert('期日が入力されていません')
-                    }
-                     if(this.todo.progress===''){
-                         alert('進捗率が設定されていません')
-                    }
-                this.addTodo(this.todo)
-                console.log(this.todo); 
-                 this.gotoLink('todoViews')
+                }
+                
+                if(!(check === '')){                                    
+                    alert(check + ' が入力されていません。');
+                                
+                }else{                                  
+                    this.addTd(this.todo)               
+                    console.log(this.todo);
+                    this.gotoLink('todoViews')
+                }                
             },
 
             gotoLink(name){
