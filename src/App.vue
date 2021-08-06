@@ -5,6 +5,7 @@
       <button @click="gotoLink('Home')">Home</button>
     </div> 
     <router-view></router-view>
+    <router-link to="/todoEdit">追加</router-link>
   </div>
 </template>
 

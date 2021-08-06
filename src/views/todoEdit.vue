@@ -1,8 +1,9 @@
 <template>
-  
-    <div id="moji"> 
+<div id="app">
+  <div> 
+    <h1>Todo編集画面</h1>
         <p>
-            <label>タイトル★★</label>
+            <label>タイトル</label>
             <input type="text" v-model="todo.title">
         </p>
         <p>
@@ -41,45 +42,49 @@
             <button @click="gotoLink('todoViews')">Todo一覧</button>
         </div>
     </div>
+            
+
+</div>
 </template>
 
-<script lang="ts">
+<script>
 import { mapActions } from 'vuex'
-    export default {
-        data(){
-            return{
-                todo: {   
-                    title:'',
-                    content:'',
-                    date:new Date(), 
-                    deadline:'',
-                    memo:'',
-                    progress:''
-                 } 
-              }   
-        },
-        methods:{
-            ...mapActions(['addTodo']),
-            submit(){
-                this.addTodo(this.todo)
-                console.log(this.todo);
-                
-            },
 
-            gotoLink(name){
-                this.$router.push({name},()=>{});
-            }
-        }
+export default {
+  name: 'App',
+  data(){
+    return {
+      todos:[
+          {
+              date:new Date(),
+              title:"test",
+              content:"この内容はテストです",
+              deadline:new Date(),
+              progress:80,
+              memo:"消すのを忘れないように"
+          }
+      ]
+    }
+  },
+  methods:{
+     ...mapActions(["todoEdit"]),
 
+    todoEdit(){
+      if(this.$route.params.address_id){
+      this.todoEdit({
+        id:this.$route.params.address_id,
+        address:this.address
+      })}
+      else{
+        this.todoEdit(this.address)
+      }
+      this.$router.push({name:"addresses"})
+      this.address={}
+      
     }
 
+  }
+}
+
+
 </script>
-<style>
-/* @import "./css/styles.css";
-
-#moji{
-   text-align: justify;
-text-justify: inter-ideograph; 
-} */
-
-</style>
